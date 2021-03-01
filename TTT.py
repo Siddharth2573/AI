@@ -1,90 +1,82 @@
-import os    
-import time    
+sq = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+def board():
+    print('\n\tTic Tac Toe')
+    print('Player 1 (X) - Player 2 (0)')
+    print('\t   |   |   ')
+    print('\t',sq[1],'|',sq[2],'|',sq[3])
+    print('\t___|___|___')
+    print('\t   |   |   ')
+    print('\t',sq[4],'|',sq[5],'|',sq[6])
+    print('\t___|___|___')
+    print('\t   |   |   ')
+    print('\t',sq[7],'|',sq[8],'|',sq[9])
+    print('\t   |   |   ')
+
+def game_status():
+    if sq[1] == sq[2] and sq[2] == sq[3]:
+        return 1
+    elif sq[4] == sq[5] and sq[5] == sq[6]:
+        return 1
+    elif sq[7] == sq[8] and sq[8] == sq[9]:
+        return 1
+    elif sq[1] == sq[4] and sq[4] == sq[7]:
+        return 1
+    elif sq[2] == sq[5] and sq[5] == sq[8]:
+        return 1
+    elif sq[3] == sq[6] and sq[6] == sq[9]:
+        return 1
+    elif sq[1] == sq[5] and sq[5] == sq[9]:
+        return 1
+    elif sq[3] == sq[5] and sq[5] == sq[7]:
+        return 1
+    elif sq[1] != 1 and sq[2] != 2 and sq[3] != 3 and sq[4] != 4 and sq[5] != 5 and sq[6] != 6 and sq[7] != 7 and sq[8] != 8 and sq[9] != 9:
+        return 0
+    else:
+        return -1
     
-board = [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']    
-player = 1    
-   
-########win Flags##########    
-Win = 1    
-Draw = -1    
-Running = 0    
-Stop = 1    
-###########################    
-Game = Running    
-Mark = 'X'    
-   
-#This Function Draws Game Board    
-def DrawBoard():    
-    print(" %c | %c | %c " % (board[1],board[2],board[3]))    
-    print("___|___|___")    
-    print(" %c | %c | %c " % (board[4],board[5],board[6]))    
-    print("___|___|___")    
-    print(" %c | %c | %c " % (board[7],board[8],board[9]))    
-    print("   |   |   ")    
-   
-#This Function Checks position is empty or not    
-def CheckPosition(x):    
-    if(board[x] == ' '):    
-        return True    
-    else:    
-        return False    
-   
-#This Function Checks player has won or not    
-def CheckWin():    
-    global Game    
-    #Horizontal winning condition    
-    if(board[1] == board[2] and board[2] == board[3] and board[1] != ' '):    
-        Game = Win    
-    elif(board[4] == board[5] and board[5] == board[6] and board[4] != ' '):    
-        Game = Win    
-    elif(board[7] == board[8] and board[8] == board[9] and board[7] != ' '):    
-        Game = Win    
-    #Vertical Winning Condition    
-    elif(board[1] == board[4] and board[4] == board[7] and board[1] != ' '):    
-        Game = Win    
-    elif(board[2] == board[5] and board[5] == board[8] and board[2] != ' '):    
-        Game = Win    
-    elif(board[3] == board[6] and board[6] == board[9] and board[3] != ' '):    
-        Game=Win    
-    #Diagonal Winning Condition    
-    elif(board[1] == board[5] and board[5] == board[9] and board[5] != ' '):    
-        Game = Win    
-    elif(board[3] == board[5] and board[5] == board[7] and board[5] != ' '):    
-        Game=Win    
-    #Match Tie or Draw Condition    
-    elif(board[1]!=' ' and board[2]!=' ' and board[3]!=' ' and board[4]!=' ' and board[5]!=' ' and board[6]!=' ' and board[7]!=' ' and board[8]!=' ' and board[9]!=' '):    
-        Game=Draw    
-    else:            
-        Game=Running    
+player = 1
+status = -1
     
-print("Tic-Tac-Toe Game Designed By Sourabh Somani")    
-print("Player 1 [X] --- Player 2 [O]\n")    
-print()    
-print()    
-print("Please Wait...")    
-time.sleep(3)    
-while(Game == Running):    
-    os.system('cls')    
-    DrawBoard()    
-    if(player % 2 != 0):    
-        print("Player 1's chance")    
-        Mark = 'X'    
-    else:    
-        print("Player 2's chance")    
-        Mark = 'O'    
-    choice = int(input("Enter the position between [1-9] where you want to mark : "))    
-    if(CheckPosition(choice)):    
-        board[choice] = Mark    
-        player+=1    
-        CheckWin()    
+while status == -1:
+    board()
+    if player % 2 == 1:
+        player = 1
+    else:
+        player = 2
+    print('\nPlayer', player)
+    choice = int(input('Enter a number: '))
+    if player == 1:
+        mark = 'X'
+    else:
+        mark = '0'
     
-os.system('cls')    
-DrawBoard()    
-if(Game==Draw):    
-    print("Game Draw")    
-elif(Game==Win):    
-    player-=1    
-    if(player%2!=0):    
-        print("Player 1 Won")    
-    else:    
-        print("Player 2 Won")   
+    if choice == 1 and sq[1] == 1:
+        sq[1] = mark
+    elif choice == 2 and sq[2] == 2:
+        sq[2] = mark
+    elif choice == 3 and sq[3] == 3:
+        sq[3] = mark
+    elif choice == 4 and sq[4] == 4:
+        sq[4] = mark
+    elif choice == 5 and sq[5] == 5:
+        sq[5] = mark
+    elif choice == 6 and sq[6] == 6:
+        sq[6] = mark
+    elif choice == 7 and sq[7] == 7:
+        sq[7] = mark
+    elif choice == 8 and sq[8] == 8:
+        sq[8] = mark
+    elif choice == 9 and sq[9] == 9:
+        sq[9] = mark
+    else:
+        print('Invalid move')
+        player -= 1
+    status = game_status()
+    player += 1
+    
+print("RESULT")
+if status == 1:
+    print('Player', player-1, 'win')
+else:
+    print('Game draw')
