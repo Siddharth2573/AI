@@ -1,16 +1,27 @@
-def maxminposition(A, n): 
+import math 
 
-	minposition = A.index(min(A)) 
- 
-	maxposition = A.index(max(A)) 
-	print ("The maximum is at position::", maxposition + 1) 
-	print ("The minimum is at position::", minposition + 1) 
+def minimax (curDepth, nodeIndex, 
+			maxTurn, scores, 
+			targetDepth): 
 
-A=list() 
-n=int(input("Enter the size of the List ::")) 
-print("Enter the Element ::") 
-for i in range(int(n)): 
-	k=int(input("")) 
-	A.append(k) 
-maxminposition(A,n)
+	if (curDepth == targetDepth): 
+		return scores[nodeIndex] 
+	
+	if (maxTurn): 
+		return max(minimax(curDepth + 1, nodeIndex * 2, 
+					False, scores, targetDepth), 
+				minimax(curDepth + 1, nodeIndex * 2 + 1, 
+					False, scores, targetDepth)) 
+	
+	else: 
+		return min(minimax(curDepth + 1, nodeIndex * 2, 
+					True, scores, targetDepth), 
+				minimax(curDepth + 1, nodeIndex * 2 + 1, 
+					True, scores, targetDepth)) 
+	
+scores = [3, 5, 2, 9, 12, 5, 23, 23] 
 
+treeDepth = math.log(len(scores), 2) 
+
+print("The optimal value is : ", end = "") 
+print(minimax(0, 0, True, scores, treeDepth)) 
